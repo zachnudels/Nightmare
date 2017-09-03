@@ -1,0 +1,26 @@
+#Bash script to run experiment for two algorithms for increasing values of filtersize. arraysize and sequential cutoffs
+#!/bin/bash
+
+fsize=3
+arrsize=100000
+sc=500
+arrlimit=1000000
+sclim=5000
+flim=21
+
+
+while [ $arrsize -le 1000000 ];
+do
+  sc=$[500]
+  for i in {1..10}
+  do
+    fsize=$[3]
+    for j in {1..10}
+    do
+      make FSIZE="$fsize" ARRSIZE="$arrsize" SC="$sc" Experiment
+      fsize=$[$fsize+2]
+    done
+    sc=$[$sc+500]
+  done
+  arrsize=$[$arrsize+100000]
+done
